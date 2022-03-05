@@ -9,7 +9,7 @@
     </form>
       <ul class="navbar-menu">
         <li class="nav-item item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="/posts">
             <%= inline_svg_tag "home-svgrepo-com.svg", class: 'icon' %>
           </a>
         </li>
@@ -31,11 +31,10 @@
       </ul>
       <ul class="profile-menu">
         <li class="nav-item">
-        <a class="user" href="#">
+        <a class="user" href="/profile">
             <div class="profile-menu-img"></div>
             <p class="profile-menu-username"><%= current_user.first_name %></p>
             </a>
-<!--              <p class="profile-menu-username"><%#= link_to "Sign Up" ,  new_user_session_path %></p>-->
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">

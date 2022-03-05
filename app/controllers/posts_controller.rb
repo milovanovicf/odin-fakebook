@@ -3,12 +3,14 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   # GET /posts or /posts.json
   def index
-    @posts = Post.all.all.order("created_at DESC")
+    @posts = Post.all.order("created_at DESC")
     @post = Post.new
+    @comment = Comment.new
   end
 
   # GET /posts/1 or /posts/1.json
-  def show
+  def current_post
+    @current_post ||= Post.find(session[:post_id]) if session[:post_id]
   end
 
   # GET /posts/new
