@@ -12,19 +12,21 @@
     </div>
   <% end %>
     <div class="input-group py-4 px-3">
-    <%= form.text_field :content, class:"form-control", size:"50", placeholder: "What's on your mind, Filip?"%>
+    <%= form.text_field :content, class:"form-control", size:"50", placeholder: "What's on your mind, #{current_user.first_name}"%>
     <%= form.submit class:"btn btn-primary" %>
     </div>
 <% end %>
 </div>
 <br>
+<% unless @posts.nil? %>
 <div class="container-sm">
   <% @posts.each do |post| %>
-    <div class="card">
+<div class="card">
       <div class="profile ps-4">
         <div class="profile-img"></div>
         <p class="username"><%= post.user.first_name %> <%= post.user.last_name  %></p>
-        <div class="dropdown">
+        <% if current_user.id == post.user.id %>
+      <div class="dropdown">
           <button class="btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" >
             <%= inline_svg_tag "dots-y-svgrepo-com", class: 'icon dots' %>
           </button>
@@ -34,13 +36,17 @@
             </li>
           </ul>
         </div>
+        <% end %>
       </div>
-      <div class="card-body py-0">
+          <div class="card-body py-0">
         <p class="ps-3 py-0 fs-6" style="color:#65676b"><%= post.created_at.strftime("%B %d, %Y") %></p>
         <p class="fs-4 ps-3"><%= post.content  %></p>
+        <p class="ps-3">
+          <%= post.likes.count == 1 ? "#{post.likes.count} like" : "#{post.likes.count} likes" %>
+        </p>
       </div>
       <div class="interaction mx-3">
-        <p><%= post.likes.count %> <%= (post.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+      <%= render partial: "likes/button", locals: {likeable: post} %>
         <div class="comment-btn">Comment</div>
       </div>
       <div class="comment-section">
@@ -49,6 +55,7 @@
             <div class="comment ps-4 me-4">
               <strong><%= comment.user.first_name %> <%= comment.user.last_name %></strong><br>
               <p class="mb-1"><%= comment.body%></p>
+              <%= render partial: "likes/button", locals: {likeable: comment} %>
             </div>
             <br>
         <% end %>
@@ -66,6 +73,6 @@
     <br>
   <% end %>
 </div>
-
-
-
+  <% else %>
+  <h3 class="text-center ">No posts :(</h3>
+<% end %>

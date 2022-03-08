@@ -3,7 +3,10 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   # GET /posts or /posts.json
   def index
-    @posts = Post.all.order("created_at DESC")
+    friends_ids = Friend.where(friend_1_id: current_user.id).map(&:friend_2_id)
+    friends_ids << current_user.id
+
+    @posts = Post.includes(:user).where(user_id: friends_ids).order("created_at DESC")
     @post = Post.new
     @comment = Comment.new
   end

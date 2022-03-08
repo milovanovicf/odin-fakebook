@@ -14,7 +14,7 @@
           </a>
         </li>
         <li class="nav-item item">
-          <a class="nav-link" aria-current="page" href="#">
+          <a class="nav-link" aria-current="page" href="/profiles">
             <%= inline_svg_tag "two-friends-svgrepo-com ", class: 'icon dropdown' %>
           </a>
         </li>
@@ -31,24 +31,24 @@
       </ul>
       <ul class="profile-menu">
         <li class="nav-item">
-        <a class="user" href="/profile">
+        <a class="user" href="/profiles/<%= current_user.id %>">
             <div class="profile-menu-img"></div>
             <p class="profile-menu-username"><%= current_user.first_name %></p>
             </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">
-            <%= inline_svg_tag "message-svgrepo-com", class: 'profile-menu-icon' %>
+            <%= inline_svg_tag "message-svgrepo-com", class: 'profiles-menu-icon' %>
           </a>
         </li><li class="nav-item">
         <a class="nav-link" href="#">
-          <%= inline_svg_tag "bell-svgrepo-com", class: 'profile-menu-icon' %>
+          <%= inline_svg_tag "bell-svgrepo-com", class: 'profiles-menu-icon' %>
         </a>
       </li>
         <li class="nav-item">
           <div class="dropdown">
             <button class="btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              <%= inline_svg_tag "arrow-down-bold-svgrepo-com", class: 'profile-menu-icon' %>
+              <%= inline_svg_tag "arrow-down-bold-svgrepo-com", class: 'profiles-menu-icon' %>
             </button>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
               <li><%= link_to "Create", new_post_path, class:"dropdown-item" %>

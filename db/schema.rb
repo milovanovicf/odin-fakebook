@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_04_235159) do
+ActiveRecord::Schema.define(version: 2022_03_07_224914) do
 
   create_table "comments", force: :cascade do |t|
     t.text "body"
@@ -21,13 +21,24 @@ ActiveRecord::Schema.define(version: 2022_03_04_235159) do
     t.index ["post_id"], name: "index_comments_on_post_id"
   end
 
-  create_table "likes", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "post_id", null: false
+  create_table "friends", force: :cascade do |t|
+    t.integer "friend_1_id"
+    t.integer "friend_2_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_id"], name: "index_likes_on_post_id"
-    t.index ["user_id", "post_id"], name: "index_likes_on_user_id_and_post_id", unique: true
+    t.index ["friend_1_id"], name: "index_friends_on_friend_1_id"
+    t.index ["friend_2_id"], name: "index_friends_on_friend_2_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "likeable_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "likeable_type"
+    t.index ["likeable_id", "likeable_type"], name: "index_likes_on_likeable_id_and_likeable_type"
+    t.index ["likeable_id"], name: "index_likes_on_likeable_id"
+    t.index ["user_id", "likeable_id", "likeable_type"], name: "index_likes_on_user_id_and_likeable_id_and_likeable_type", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
@@ -36,6 +47,11 @@ ActiveRecord::Schema.define(version: 2022_03_04_235159) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -52,6 +68,6 @@ ActiveRecord::Schema.define(version: 2022_03_04_235159) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "likes", "posts"
+  add_foreign_key "likes", "posts", column: "likeable_id"
   add_foreign_key "likes", "users"
 end

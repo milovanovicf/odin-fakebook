@@ -1,6 +1,5 @@
 @import "bootstrap";
 
-
 .search,
 .profile-img,
 .form-input{
@@ -13,7 +12,7 @@
 }
 
 .item{
-  padding: 15px 30px;
+  padding: 10px 30px;
   margin: 0 20px;
   transition: background-color .4s;
 
@@ -91,7 +90,6 @@
   }
 
   .card {
-    border-radius: 15px;
     box-shadow: 0 5px 15px rgba(#000, 0.1);
   }
 
@@ -235,3 +233,34 @@
     box-shadow: none !important;
   }
 
+.friends {
+  background-color: #F0F2F5;
+  height: 90vh;
+}
+
+.friend-card-img {
+  width: 280px;
+  height: 230px;
+  background-color: #86b7fe;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+}
+
+.friend-card-img-sm {
+  width: 100%;
+  height: 130px;
+  background-color: #86b7fe;
+}
+
+.btn-like {
+  border: none;
+  background-color: transparent;
+  padding: 0 35px;
+  transition: all 0.4s;
+  border-radius: 15px
+;
+  &:hover {
+    cursor: pointer;
+    background-color: #eee;
+  }
+}
