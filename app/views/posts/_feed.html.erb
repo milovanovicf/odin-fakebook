@@ -55,6 +55,7 @@
             <div class="comment ps-4 me-4">
               <strong><%= comment.user.first_name %> <%= comment.user.last_name %></strong><br>
               <p class="mb-1"><%= comment.body%></p>
+              <%= comment.likes.count == 1 ? "#{comment.likes.count} like" : "#{comment.likes.count} likes" %>
               <%= render partial: "likes/button", locals: {likeable: comment} %>
             </div>
             <br>

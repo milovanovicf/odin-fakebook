@@ -60,7 +60,7 @@
       <div class="row mx-0">
       <% friends_ids = Friend.where(friend_1_id: @profile.id).map(&:friend_2_id)%>
       <% friends_ids << current_user.id%>
-      <% User.where(id: friends_ids).where.not(id:current_user.id).each do |user|%>
+      <% User.where(id: friends_ids).each do |user|%>
         <div class="card align-items-center col-6 m-2 p-0" style="width: 180px">
           <div class="friend-card-img-sm d-flex align-items-end">
             <h6 class="card-title md-0 ps-2" style="color:#fff"><%= user.first_name%> <%= user.last_name%></h6>
